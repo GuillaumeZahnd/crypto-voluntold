@@ -33,12 +33,12 @@ if __name__ == '__main__':
   input('-' * 64)
 
   # [Mining] --> Process of establishing a valid candidate
-  leading_zeros = 8     # Condition to promote a valid block
+  leading_zeros = 8     # Difficulty (condition to promote a valid block)
   length_min    = 5     # Shortest possible name (e.g. "BoLiu")
   length_max    = 20    # Longest possible name (e.g., "AmbroseRastapopoulos")
   valid_block   = False # Initial conditions
   itx           = 0     # Initial conditions
-  itx_max       = 1e3   # Upper limit to the number of attempts to mint a valid block
+  itx_max       = 1e5   # Upper limit to the number of attempts to mint a valid block
   while not valid_block and itx < itx_max:
     itx       +=1
     length    = random.SystemRandom().randint(length_min, length_max)
