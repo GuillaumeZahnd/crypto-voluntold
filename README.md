@@ -6,7 +6,7 @@ Quite elegant (yet perhaps a bit convoluted) way to promote a candidate.
 
 ## Why?
 
-Critical need of a process that is resistant against evil-maid attacks.
+Critical need of a truly random process that is resistant against evil-maid attacks.
 
 ## How? 
 
