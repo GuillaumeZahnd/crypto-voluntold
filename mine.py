@@ -3,6 +3,7 @@ import hashlib
 import random
 import yfinance as yf
 from datetime import date
+from datetime import timedelta
 from icecream import ic
 
 
@@ -23,9 +24,11 @@ if __name__ == '__main__':
   input('-' * 64)
 
   # [Unpredictability] --> Today stock market value
-  ticker = 'MSFT'
-  today  = date.today().strftime('%Y-%m-%d')
-  stock  = str(yf.download(ticker, start=today, end=today).Open.values[0])
+  ticker    = 'MSFT'
+  today     = date.today()
+  yesterday = today - timedelta(days=1)
+  stock     = str(
+    yf.download(ticker, start=yesterday.strftime('%Y-%m-%d'), end=today.strftime('%Y-%m-%d')).Open.values[0])
   ic(ticker, today, stock)
   input('-' * 64)
 
