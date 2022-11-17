@@ -13,13 +13,13 @@ Critical need of a truly random process that is resistant against evil-maid atta
 Extra-secure cryptography approach:
 
 ```sh
-candidate_block = email + previous_hash + stock + token
+block_hash := sha256sum(email ⧺ previous_block_hash ⧺ stock ⧺ candidate_token)
 ```
 
 - `email`: Initiate the request (message received from the interlocutor)
-- `previous_hash`: Authenticate the blockchain (irreversible history)
+- `previous_block_hash`: Authenticate the blockchain (irreversible history)
 - `stock`: Prevent future manipulation with high-entropy last-minute unpredictability (stock market ticker)
-- `token`: Candidate (name of a potential victim)
+- `candidate_token`: Nonce key (name of a potential victim)
 
 A list of tokens is mined, and the block with the minimum hash is selected.
 
