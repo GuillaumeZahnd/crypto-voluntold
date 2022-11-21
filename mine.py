@@ -2,8 +2,6 @@ import string
 import hashlib
 import random
 import yfinance as yf
-from datetime import date
-from datetime import timedelta
 from icecream import ic
 
 
@@ -24,12 +22,9 @@ if __name__ == '__main__':
   input('-' * 64)
 
   # [Unpredictability] --> Today stock market value
-  ticker    = 'MSFT'
-  today     = date.today()
-  yesterday = today - timedelta(days=1)
-  stock     = str(
-    yf.download(ticker, start=yesterday.strftime('%Y-%m-%d'), end=today.strftime('%Y-%m-%d')).Open.values[0])
-  ic(ticker, today, stock)
+  ticker = 'MSFT'
+  stock  = str(yf.Ticker(ticker).history(period='1d')['Close'][0])
+  ic(ticker, stock)
   input('-' * 64)
 
   # [Mining] --> Process of establishing a valid candidate
@@ -38,7 +33,7 @@ if __name__ == '__main__':
   length_max    = 20    # Longest possible name (e.g., "AmbroseRastapopoulos")
   valid_block   = False # Initial conditions
   itx           = 0     # Initial conditions
-  itx_max       = 1e5   # Upper limit to the number of attempts to mint a valid block
+  itx_max       = 1e4   # Upper limit to the number of attempts to mint a valid block
   while not valid_block and itx < itx_max:
     itx       +=1
     length    = random.SystemRandom().randint(length_min, length_max)
@@ -62,15 +57,15 @@ if __name__ == '__main__':
   for token_id in range(len(token_list)):
     block = email + previous_hash + stock + token_list[token_id]
     block_sha = hashlib.sha256(block.encode()).hexdigest()
-    ic(token_list[token_id], block_sha)
+    ic(token_id, token_list[token_id], block_sha)
     if block_sha < sha_min:
       sha_min = block_sha
-      token_select = token_id
+      most_acceptable_token_id = token_id
   input('-' * 64)
 
   # [Promotion] --> Selection of the most acceptable token
-  most_acceptable_token = token_list[token_select]
-  ic(most_acceptable_token, sha_min)
+  most_acceptable_token = token_list[most_acceptable_token_id]
+  ic(most_acceptable_token_id, most_acceptable_token, sha_min)
   input('-' * 64)
 
   # [Blockchain] --> Store the current hash for future use
