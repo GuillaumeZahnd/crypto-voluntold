@@ -18,7 +18,7 @@ block_hash := sha256sum(email ⧺ previous_block_hash ⧺ stock ⧺ candidate_to
 
 - `email`: Initiate the request (message received from the interlocutor)
 - `previous_block_hash`: Authenticate the blockchain (irreversible history)
-- `stock`: Prevent future manipulation with high-entropy last-minute unpredictability (stock market ticker)
+- `stock`: Prevent forecasting by introducing high-entropy last-minute unpredictability (stock market ticker)
 - `candidate_token`: Nonce key (name of a potential victim)
 
 A list of tokens is mined, and the block with the minimum hash is selected.
