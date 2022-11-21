@@ -28,21 +28,29 @@ if __name__ == '__main__':
   input('-' * 64)
 
   # [Mining] --> Process of establishing a valid candidate
-  leading_zeros = 8     # Difficulty (condition to promote a valid block)
-  length_min    = 5     # Shortest possible name (e.g. "BoLiu")
-  length_max    = 20    # Longest possible name (e.g., "AmbroseRastapopoulos")
-  valid_block   = False # Initial conditions
-  itx           = 0     # Initial conditions
-  itx_max       = 1e4   # Upper limit to the number of attempts to mint a valid block
+  leading_zeros = 8        # Difficulty (condition to promote a valid block)
+  length_min    = 5        # Shortest possible name (e.g. "BoLiu")
+  length_max    = 20       # Longest possible name (e.g., "AmbroseRastapopoulos")
+  valid_block   = False    # Initial conditions
+  itx           = 0        # Initial conditions
+  itx_max       = 1e4      # Upper limit to the number of attempts to mint a valid block
+  sha_min       = 'f' * 64 # Set hash to maximum hexadecimal value
   while not valid_block and itx < itx_max:
     itx       +=1
     length    = random.SystemRandom().randint(length_min, length_max)
     token     = ''.join(random.SystemRandom().choice(string.ascii_uppercase) for _ in range(length))
     block     = email + previous_hash + stock + token
     block_sha = hashlib.sha256(block.encode()).hexdigest()
+    if block_sha < sha_min:
+      sha_min = block_sha
+      token_with_minimal_hash = token
     if block_sha[:leading_zeros] == '0' * leading_zeros:
       valid_block = True
+      print('-' * 64)
     ic(itx, token, block_sha, valid_block)
+  if not valid_block:
+    print('-' * 64)
+    ic(token_with_minimal_hash, sha_min)
   input('-' * 64)
 
   # [Token list] --> List of candidates
