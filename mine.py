@@ -1,6 +1,7 @@
 import string
 import hashlib
 import random
+import math
 import yfinance as yf
 from icecream import ic
 
