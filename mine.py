@@ -33,7 +33,7 @@ if __name__ == '__main__':
   length_max    = 20       # Longest possible name (e.g., "AmbroseRastapopoulos")
   valid_block   = False    # Initial conditions
   itx           = 0        # Initial conditions
-  itx_max       = 1e4      # Upper limit to the number of attempts to mint a valid block
+  itx_max       = 1e5      # Upper limit to the number of attempts to mint a valid block
   sha_min       = 'f' * 64 # Set hash to maximum hexadecimal value
   while not valid_block and itx < itx_max:
     itx       +=1
